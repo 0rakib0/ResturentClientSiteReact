@@ -9,6 +9,7 @@ import Soup from '../../assets/menu/soup-bg.jpg'
 import SectionTitle from "../../SharePage/SectionTitle";
 import MenuCategory from "../../SharePage/MenuCategory";
 import useMenu from "../../Hooks/useMenu";
+import { Link } from "react-router-dom";
 const Menu = () => {
 
     const [menu] = useMenu();
@@ -34,7 +35,7 @@ const Menu = () => {
             ></SectionTitle>
             <MenuCategory items={offered}></MenuCategory>
             <div className="flex justify-center">
-                <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                <Link to='/orders/desserts'><button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button></Link>
             </div>
             {/* dessert section */}
             <Cover
@@ -44,7 +45,9 @@ const Menu = () => {
             </Cover>
             <MenuCategory items={dessert}></MenuCategory>
             <div className="flex justify-center">
-                <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                <Link to='/orders/desserts'>
+                    <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                </Link>
             </div>
             {/* Pizza section */}
             <Cover
@@ -54,18 +57,18 @@ const Menu = () => {
             </Cover>
             <MenuCategory items={pizza}></MenuCategory>
             <div className="flex justify-center">
-                <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                <Link to='/orders/pizza'><button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button></Link>
             </div>
 
-             {/* Salad section */}
-             <Cover
+            {/* Salad section */}
+            <Cover
                 img={Salad}
                 title='SALAD'
             >
             </Cover>
             <MenuCategory items={salad}></MenuCategory>
             <div className="flex justify-center">
-                <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+               <Link to='/orders/salad'> <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button></Link>
             </div>
             {/* Soup section */}
             <Cover
@@ -75,10 +78,10 @@ const Menu = () => {
             </Cover>
             <MenuCategory items={soup}></MenuCategory>
             <div className="flex justify-center">
-                <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                <Link to='/orders/soup'>
+                    <button className="border-b-4 font-semibold border-black pb-2 rounded-lg mb-4">ORDER YOUR FAVOURITE FOOD</button>
+                </Link>
             </div>
-
-
         </div>
     );
 };
