@@ -17,7 +17,7 @@ const FeatureItme = () => {
                     <p>Aug 15, 2023</p>
                     <p>Where can I get some</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quibusdam accusantium ipsam sit recusandae aliquam, aspernatur ullam pariatur alias, iure officiis temporibus amet neque dolor.</p>
-                    <button className="bg-yellow-400 my-6 px-4 py-3 rounded-lg">Order Now</button>
+                    <button className="bg-yellow-400 my-6 px-4 py-3 rounded-lg borde-b-4 ">Order Now</button>
                 </div>
             </div>
         </div>

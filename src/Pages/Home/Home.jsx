@@ -3,12 +3,15 @@ import Category from "./Category";
 import FeatureItme from "./FeatureItem";
 import PopularMenu from "./PopularMenu";
 import TestMonials from "./TestMomonials";
-
+import { Helmet} from 'react-helmet-async';
 
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
             <Banner></Banner>
             <Category></Category>
             <PopularMenu></PopularMenu>
