@@ -9,6 +9,7 @@ const FeatureItme = () => {
                 subHeader={'Check it out'}
                 mainDeader={'FEATURED ITEM'}
             ></SectionTitle>
+             
             <div className="md:flex justify-center bg-fixed items-center pb-20 pt-12 px-36 myStyle pt-8 text-white my-20">
                 <div>
                     <img src={image} alt="" />
