@@ -1,14 +1,29 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "../Provider/Provider";
+import app from "../firebase.config";
+import { getAuth } from "firebase/auth";
+const auth = getAuth(app)
 const Navbar = () => {
-    
+
+    const { user, Logout } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        Logout(auth)
+    }
 
     const NavLink = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/menu'>Menu</Link></li>
         <li><Link to='/orders/salad'>Orders</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        {user ? <li><button onClick={handleLogout}>Logout</button></li> :
+            <li><Link to='/login'>Login</Link></li>
+        }
+
+
     </>
+
+
 
     return (
         <>
@@ -30,9 +45,14 @@ const Navbar = () => {
                         {NavLink}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
-                </div>
+                {user&& <div className="navbar-end">
+                    <h1 className="mr-6 text-2xl">{user.displayName}</h1>
+                    <div className="avatar">
+                        <div className="w-16 mr-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <img src={user.photoURL} />
+                        </div>
+                    </div>
+                </div>}
             </div>
 
         </>

@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../Provider/Provider'
 import Swal from 'sweetalert2'
+import { getAuth, updateProfile } from "firebase/auth";
+import app from '../../firebase.config'
+const auth = getAuth(app)
+
 
 const Register = () => {
 
@@ -14,19 +18,30 @@ const Register = () => {
         event.preventDefault()
         const email = event.target.email.value
         const password = event.target.password.value
-
+        const name = event.target.name.value
+        const photo = event.target.photo.value
         Register(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Account Successfully Register!",
-                    text: "That thing is still around?",
-                    icon: "success"
-                });
+                
+                const currentUser = result.user
+                // Swal.fire({
+                //     title: "Account Successfully Register!",
+                //     text: "That thing is still around?",
+                //     icon: "success"
+                // })
+                updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                
             })
             .catch((error) => {
-                console.log(error.message)
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: "Something wrong!",
+                    icon: "error"
+                });
+                
             })
 
     }
@@ -43,9 +58,21 @@ const Register = () => {
                         <h4 className='text-2xl text-center'>Register Account</h4>
                         <div className="form-control">
                             <label className="label">
+                                <span className="label-text">Full Name</span>
+                            </label>
+                            <input type="text" placeholder="Full name" name='name' className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" placeholder="email" name='email' className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input type="text" placeholder="Photo URL" name='photo' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

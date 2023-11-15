@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Provider/Provider";
 import Banner from "./Banner";
 import Category from "./Category";
 import FeatureItme from "./FeatureItem";
@@ -9,7 +7,6 @@ import { Helmet} from 'react-helmet-async';
 
 
 const Home = () => {
-    const {user} = useContext(AuthContext)
     return (
         <div>
             <Helmet>
@@ -17,7 +14,6 @@ const Home = () => {
             </Helmet>
             <Banner></Banner>
             <h1>Hello Bangladesh</h1>
-            <h1>{user}</h1>
             <Category></Category>
             <PopularMenu></PopularMenu>
             <FeatureItme></FeatureItme>

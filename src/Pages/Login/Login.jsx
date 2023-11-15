@@ -1,14 +1,21 @@
 
 import './Login.css'
 import loginImg from '../../assets/others/authentication2.png'
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/Provider';
+import Swal from 'sweetalert2';
+
 
 const Login = () => {
 
-    const CapRef = useRef()
+    const { Login } = useContext(AuthContext)
     const [Disable, setDisable] = useState(true)
+    const naviget = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -19,10 +26,27 @@ const Login = () => {
         const email = event.target.email.value
         const password = event.target.password.value
         console.log(email, password)
+        Login(email, password)
+            .then(result => {
+                console.log(result)
+                Swal.fire({
+                    title: "Account Successfully Login!",
+                    text: "Your Account Successfully login",
+                    icon: "success"
+                });
+                naviget(from, {replace: true})
+            })
+            .catch(error =>{
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: "Something wrong!",
+                    icon: "error"
+                });
+            })
     }
 
-    const handleValided = () => {
-        const ValidateValue = CapRef.current.value
+    const handleValided = (e) => {
+        const ValidateValue = e.target.value
         if (validateCaptcha(ValidateValue) == true) {
             setDisable(false)
         }
@@ -55,8 +79,7 @@ const Login = () => {
                                 <label className="label">
                                     <LoadCanvasTemplate />
                                 </label>
-                                <input ref={CapRef} type="text" placeholder="write avobe text" className="input input-bordered" required />
-                                <button onClick={handleValided} className='btn btn-xs mt-1 text-white bg-yellow-500'>Valided</button>
+                                <input onBlur={handleValided} type="text" placeholder="write avobe text" className="input input-bordered" required />
                             </div>
                         </div>
                         <div className="form-control mt-6">
