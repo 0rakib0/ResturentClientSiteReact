@@ -8,14 +8,23 @@ import {
 import { HelmetProvider } from 'react-helmet-async';
 import Provider from './Provider/Provider.jsx';
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider>
-      <HelmetProvider>
-        <div className='w-11/12 mx-auto'>
-          <RouterProvider router={router} />
-        </div>
-      </HelmetProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider>
+        <HelmetProvider>
+          <div className='w-11/12 mx-auto'>
+            <RouterProvider router={router} />
+          </div>
+        </HelmetProvider>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

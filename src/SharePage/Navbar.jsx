@@ -4,10 +4,14 @@ import { AuthContext } from "../Provider/Provider";
 import app from "../firebase.config";
 import { getAuth } from "firebase/auth";
 const auth = getAuth(app)
+import { FaShoppingCart } from "react-icons/fa";
+import useCard from "../Hooks/useCard";
 const Navbar = () => {
 
     const { user, Logout } = useContext(AuthContext)
 
+    const [card] = useCard()
+    console.log(card)
     const handleLogout = () => {
         Logout(auth)
     }
@@ -19,6 +23,12 @@ const Navbar = () => {
         {user ? <li><button onClick={handleLogout}>Logout</button></li> :
             <li><Link to='/login'>Login</Link></li>
         }
+        <li>
+            <button>
+                <FaShoppingCart className="text-2xl"></FaShoppingCart>
+                <div className="badge badge-secondary">+{card?.length}</div>
+            </button>
+        </li>
 
 
     </>
@@ -45,7 +55,7 @@ const Navbar = () => {
                         {NavLink}
                     </ul>
                 </div>
-                {user&& <div className="navbar-end">
+                {user && <div className="navbar-end">
                     <h1 className="mr-6 text-2xl">{user.displayName}</h1>
                     <div className="avatar">
                         <div className="w-16 mr-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
