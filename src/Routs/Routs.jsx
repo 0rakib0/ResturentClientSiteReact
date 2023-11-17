@@ -11,6 +11,7 @@ import Register from "../Pages/Register/Register";
 import PrivatRouts from "./PrivatRouts";
 import Dashbord from "../Layout/Dashbord";
 import CardItems from "../Pages/CardItems/CardItems";
+import AllUsers from "../Pages/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path:'card-items',
         element:<CardItems></CardItems>
+      },
+      {
+        path:'all-users',
+        element:<AllUsers></AllUsers>
       }
     ]
   }
