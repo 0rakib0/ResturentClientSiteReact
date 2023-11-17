@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/Provider';
 import Swal from 'sweetalert2';
+import AxiousPublich from '../../Hooks/AxiousPublich';
 
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
     const [Disable, setDisable] = useState(true)
     const naviget = useNavigate()
     const location = useLocation()
+    const publicAxious = AxiousPublich()
 
     const from = location.state?.from?.pathname || '/'
 
@@ -25,10 +27,8 @@ const Login = () => {
         event.preventDefault()
         const email = event.target.email.value
         const password = event.target.password.value
-        console.log(email, password)
         Login(email, password)
             .then(result => {
-                console.log(result)
                 Swal.fire({
                     title: "Account Successfully Login!",
                     text: "Your Account Successfully login",
@@ -48,13 +48,22 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                const user = result.user
-                console.log(user)
                 Swal.fire({
                     title: "Account Successfully Login!",
                     text: "Your Account Successfully login",
                     icon: "success"
                 });
+                const user = {
+                    email: result.user.email,
+                    name: result.user.displayName
+
+                }
+            
+                publicAxious.post('/user', user)
+                .then(res => {
+                    console.log(res.data)
+                })
+
                 naviget('/')
             })
             .catch(error => {

@@ -36,9 +36,7 @@ const CardItems = () => {
             }
         });
     }
-    console.log(card)
     const totalPrice = card?.reduce((total, item) => total + item.price, 0);
-    console.log(totalPrice)
     return (
         <div>
             <SectionTitle
