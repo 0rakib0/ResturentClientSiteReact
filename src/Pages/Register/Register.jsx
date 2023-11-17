@@ -1,18 +1,22 @@
 
 import '../Login/Login.css'
 import loginImg from '../../assets/others/authentication2.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../Provider/Provider'
 import Swal from 'sweetalert2'
 import { getAuth, updateProfile } from "firebase/auth";
 import app from '../../firebase.config'
+import AxiousPublich from '../../Hooks/AxiousPublich'
 const auth = getAuth(app)
 
 
 const Register = () => {
 
+    const {Logout} = useContext(AuthContext)
     const { Register } = useContext(AuthContext)
+    const publicAxious = AxiousPublich()
+    const naviget = useNavigate()
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -22,7 +26,7 @@ const Register = () => {
         const photo = event.target.photo.value
         Register(email, password)
             .then(result => {
-                
+
                 const currentUser = result.user
                 // Swal.fire({
                 //     title: "Account Successfully Register!",
@@ -33,7 +37,25 @@ const Register = () => {
                     displayName: name,
                     photoURL: photo
                 })
-                
+                const user = {
+                    email,
+                    name
+                }
+                publicAxious.post('/user', user)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: `Your Successfully Created`,
+                                text: "Account create success. Please login!",
+                                icon: "success"
+                            });
+                            
+                        }
+                        Logout()
+                        naviget('/login')
+                    })
+
+
             })
             .catch((error) => {
                 Swal.fire({
@@ -41,7 +63,7 @@ const Register = () => {
                     text: "Something wrong!",
                     icon: "error"
                 });
-                
+
             })
 
     }

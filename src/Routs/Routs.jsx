@@ -9,6 +9,8 @@ import Order from "../Pages/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivatRouts from "./PrivatRouts";
+import Dashbord from "../Layout/Dashbord";
+import CardItems from "../Pages/CardItems/CardItems";
 
 export const router = createBrowserRouter([
   {
@@ -37,4 +39,14 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'/dashbord',
+    element:<Dashbord></Dashbord>,
+    children:[
+      {
+        path:'card-items',
+        element:<CardItems></CardItems>
+      }
+    ]
+  }
 ]);

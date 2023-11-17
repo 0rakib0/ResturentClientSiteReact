@@ -25,8 +25,8 @@ const Navbar = () => {
         }
         <li>
             <button>
-                <FaShoppingCart className="text-2xl"></FaShoppingCart>
-                <div className="badge badge-secondary">+{card?.length}</div>
+                <Link to='/dashbord/card-items' className="flex items-center gap-2"> <FaShoppingCart className="text-2xl"></FaShoppingCart>
+                    <div className="badge badge-secondary">+{card?.length}</div></Link>
             </button>
         </li>
 
