@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
 
-    const { Login } = useContext(AuthContext)
+    const { Login, googleLogin } = useContext(AuthContext)
     const [Disable, setDisable] = useState(true)
     const naviget = useNavigate()
     const location = useLocation()
@@ -34,9 +34,30 @@ const Login = () => {
                     text: "Your Account Successfully login",
                     icon: "success"
                 });
-                naviget(from, {replace: true})
+                naviget(from, { replace: true })
             })
-            .catch(error =>{
+            .catch(error => {
+                Swal.fire({
+                    title: `${error.message}`,
+                    text: "Something wrong!",
+                    icon: "error"
+                });
+            })
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                Swal.fire({
+                    title: "Account Successfully Login!",
+                    text: "Your Account Successfully login",
+                    icon: "success"
+                });
+                naviget('/')
+            })
+            .catch(error => {
                 Swal.fire({
                     title: `${error.message}`,
                     text: "Something wrong!",
@@ -87,6 +108,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p className='text-center mb-6'>New here? <Link to='/register'>Register</Link></p>
+                    <button className='mb-4 bg-yellow-400 py-2 w-11/12 mx-auto rounded-lg text-white' onClick={handleGoogleLogin}>Login With Google</button>
                 </div>
             </div>
         </div>
