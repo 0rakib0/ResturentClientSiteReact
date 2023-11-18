@@ -23,7 +23,7 @@ const Dashbord = () => {
 
                             <li><NavLink to='payment-history' className='flex items-center gap-1'><FaList className="text-lg"></FaList> Manage Item</NavLink></li>
 
-                            <li className="w-full"><NavLink to='card-items' className='flex items-center gap-1'><FaBook className="text-lg"></FaBook> Manage Booking</NavLink></li>
+                            <li className="w-full"><NavLink to='card-items' className='flex items-center gap-1'><FaBook className="text-lg"></FaBook>Bookings</NavLink></li>
 
                             <li><NavLink to='all-users' className='flex items-center gap-1'> <FaUsers className="text-lg"></FaUsers> All Users</NavLink></li>
                         </>
