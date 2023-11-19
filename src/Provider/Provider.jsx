@@ -55,7 +55,7 @@ const Provider = ( {children} ) =>{
             setLoading(false)
         })
         return () => unSubsCribe()
-    },[])
+    },[publicAxious])
 
     const AuthInfo = {
         user,
