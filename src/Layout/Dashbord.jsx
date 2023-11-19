@@ -1,9 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
 import './Active.css'
 import { FaBook, FaCalendarAlt, FaCreditCard, FaHome, FaIndent, FaList, FaNotesMedical, FaRegCalendarPlus, FaRegCommentAlt, FaShoppingBag, FaShoppingCart, FaUsers, FaMailBulk } from "react-icons/fa";
+import useAdmin from "../Hooks/useAdmin";
 const Dashbord = () => {
 
-    const isAdmin = true
+    const [isAdmin] = useAdmin()
 
     return (
         <div className="grid grid-cols-12 gap-6">
