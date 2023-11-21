@@ -13,6 +13,8 @@ import Dashbord from "../Layout/Dashbord";
 import CardItems from "../Pages/CardItems/CardItems";
 import AllUsers from "../Pages/AllUsers/AllUsers";
 import AdminRouts from "./AdminRouts";
+import AddItems from "../Pages/AddItems/AddItems";
+import AllItem from "../Pages/AllItem/AllItem";
 
 export const router = createBrowserRouter([
   {
@@ -52,7 +54,18 @@ export const router = createBrowserRouter([
       {
         path:'all-users',
         element:<AdminRouts><AllUsers></AllUsers></AdminRouts>
+      },
+      {
+        path:'add-items',
+        element:<AdminRouts><AddItems></AddItems></AdminRouts>
+      },
+      {
+        path:'all-items',
+        element:<AdminRouts>
+          <AllItem></AllItem>
+        </AdminRouts>
       }
+
     ]
   }
 ]);

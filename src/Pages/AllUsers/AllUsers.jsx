@@ -32,6 +32,7 @@ const AllUsers = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 secureAxious.patch(`/user/${id}`)
+                
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch()

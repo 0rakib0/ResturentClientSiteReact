@@ -20,9 +20,9 @@ const Dashbord = () => {
                         isAdmin ? <>
                             <li className="hover:text-white"><NavLink className='flex items-center gap-1' to='/dashbord'> <FaHome className="text-lg"></FaHome> Admin Home</NavLink></li>
 
-                            <li><NavLink to='resurvation' className='flex items-center gap-1'><FaNotesMedical className="text-lg"></FaNotesMedical> Add Item</NavLink></li>
+                            <li><NavLink to='add-items' className='flex items-center gap-1'><FaNotesMedical className="text-lg"></FaNotesMedical> Add Item</NavLink></li>
 
-                            <li><NavLink to='payment-history' className='flex items-center gap-1'><FaList className="text-lg"></FaList> Manage Item</NavLink></li>
+                            <li><NavLink to='all-items' className='flex items-center gap-1'><FaList className="text-lg"></FaList> Manage Item</NavLink></li>
 
                             <li className="w-full"><NavLink to='card-items' className='flex items-center gap-1'><FaBook className="text-lg"></FaBook>Bookings</NavLink></li>
 
