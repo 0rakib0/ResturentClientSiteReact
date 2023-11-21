@@ -6,7 +6,7 @@ import useMenu from "../../Hooks/useMenu"
 
 const PopularMenu = () => {
     const [menu] = useMenu()
-    const Popular = menu.filter(item => item.category === 'popular')
+    const Popular = menu?.filter(item => item.category === 'popular')
 
     return (
         <div>
@@ -16,7 +16,7 @@ const PopularMenu = () => {
             ></SectionTitle>
             <div className="grid md:grid-cols-2 gap-4 mb-12">
                 {
-                    Popular.map(item =><MenuItem key={item._id} item={item}></MenuItem>)
+                    Popular?.map(item =><MenuItem key={item._id} item={item}></MenuItem>)
                 }
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAxious from "../../Hooks/AxiousSecure";
 import useCard from "../../Hooks/useCard";
 import SectionTitle from "../../SharePage/SectionTitle";
@@ -22,17 +23,17 @@ const CardItems = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiourSecure.delete(`/cards/${id}`)
-                .then(res =>{
-                    if(res.data.deletedCount > 0){
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                        refetch()
-                    }
-                })
-                
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            refetch()
+                        }
+                    })
+
             }
         });
     }
@@ -46,7 +47,12 @@ const CardItems = () => {
             <div className="flex justify-evenly text-2xl font-semibold">
                 <div>TOTALL ORDERS: {card?.length}</div>
                 <div>TOTALL PRICE: ${totalPrice}</div>
-                <div className="bg-[#D1A054] px-6 py-2 text-white rounded-md"><button>PAY</button></div>
+                <div className="bg-[#D1A054] px-6 py-2 text-white rounded-md">
+                    <Link to='/dashbord/payment'>
+                        <button>PAY</button>
+                    </Link>
+
+                </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="table">
