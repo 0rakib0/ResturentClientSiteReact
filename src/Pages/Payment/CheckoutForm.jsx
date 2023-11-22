@@ -1,4 +1,4 @@
-
+import Swal from 'sweetalert2'
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useAxious from "../../Hooks/AxiousSecure";
@@ -12,6 +12,7 @@ const CheckoutForm = () => {
     const [clientSecret, setCientSecret] = useState('')
     const secureAxious = useAxious()
     const { user } = useContext(AuthContext)
+    const [tranjectionID, setTranjectionID] = useState('')
 
     const [cart] = useCard()
     const totalAmount = cart?.reduce((total, item) => total + item.price, 0)
@@ -47,21 +48,54 @@ const CheckoutForm = () => {
                 }
             }
         })
-        if(confirmError){
-            console.log('confirm Error')
-        }else{
-            console.log(paymentIntent)
+        if (confirmError) {
+
+            alert('Payment Not Complate! Something wrong!')
+        } else {
+            console.log(paymentIntent.status)
+            Swal.fire({
+                position: `Your Payment ID: ${paymentIntent.id}`,
+                icon: "success",
+                title: "Payment successfully complate!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTranjectionID(paymentIntent.id)
+            const paymentinfo = {
+                email: user?.email,
+                price: totalAmount,
+                date: new Date(),
+                transactionId: paymentIntent.id,
+                CartID: cart.map(item => item._id),
+                menuItem: cart.map(item => item.itemId),
+                status: 'pending'
+            }
+            secureAxious.post('/payments', paymentinfo)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: `order successfully submited!`,
+                            icon: "success",
+                            title: "Thanks you order. come back again!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
         }
     }
 
 
-    useEffect(() => {
-        secureAxious.post('/create-payment-intent', { price: totalAmount })
-            .then(res => {
-                console.log(res.data.clientSecret)
-                setCientSecret(res.data.clientSecret)
-            })
-    }, [secureAxious, totalAmount])
+    if (totalAmount > 0) {
+        useEffect(() => {
+            secureAxious.post('/create-payment-intent', { price: totalAmount })
+                .then(res => {
+                    console.log(res.data.clientSecret)
+                    setCientSecret(res.data.clientSecret)
+                })
+        }, [secureAxious, totalAmount])
+    }
 
 
 
