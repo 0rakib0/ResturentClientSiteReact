@@ -12,7 +12,7 @@ const CheckoutForm = () => {
     const [clientSecret, setCientSecret] = useState('')
     const secureAxious = useAxious()
     const { user } = useContext(AuthContext)
-    const [tranjectionID, setTranjectionID] = useState('')
+    const [ setTranjectionID] = useState('')
 
     const [cart] = useCard()
     const totalAmount = cart?.reduce((total, item) => total + item.price, 0)

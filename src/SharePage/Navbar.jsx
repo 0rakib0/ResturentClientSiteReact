@@ -6,9 +6,14 @@ import { getAuth } from "firebase/auth";
 const auth = getAuth(app)
 import { FaShoppingCart } from "react-icons/fa";
 import useCard from "../Hooks/useCard";
+import useAdmin from "../Hooks/useAdmin";
 const Navbar = () => {
 
     const { user, Logout } = useContext(AuthContext)
+    const [isAdmin] = useAdmin()
+
+    console.log(isAdmin)
+
 
     const [card] = useCard()
     const handleLogout = () => {
@@ -19,9 +24,17 @@ const Navbar = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/menu'>Menu</Link></li>
         <li><Link to='/orders/salad'>Orders</Link></li>
-        {user ? <li><button onClick={handleLogout}>Logout</button></li> :
+        {user ? <>
+            <li><button onClick={handleLogout}>Logout</button></li>
+        </> :
             <li><Link to='/login'>Login</Link></li>
         }
+        {/* {user && !isAdmin && <li><Link to='/dashbord/user-home' aria-disabled onClick={handleLogout}>Dashbord</Link></li>}
+        {user && isAdmin && <>
+            <li><Link to='/dashbord/admin-home' onClick={handleLogout}>Dashbord</Link></li>
+        </>
+        } */}
+
         <li>
             <button>
                 <Link to='/dashbord/card-items' className="flex items-center gap-2"> <FaShoppingCart className="text-2xl"></FaShoppingCart>

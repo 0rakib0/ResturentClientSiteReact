@@ -1,6 +1,7 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import './Active.css'
 import { FaBook, FaCalendarAlt, FaCreditCard, FaHome, FaIndent, FaList, FaNotesMedical, FaRegCalendarPlus, FaRegCommentAlt, FaShoppingBag, FaShoppingCart, FaUsers, FaMailBulk } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
 import useAdmin from "../Hooks/useAdmin";
 const Dashbord = () => {
 
@@ -8,8 +9,9 @@ const Dashbord = () => {
 
     return (
         <div className="grid grid-cols-12 gap-6">
-            <div className="bg-[#D1A054] pb-16 pl-4 pt-2  col-span-2">
+            <div className="bg-[#D1A054] pb-16 pl-4 pt-2  col-span-3">
                 <div>
+                    <Link to='/'><h2 className="flex items-center gap-2 text-xl my-2 text-white"><FaArrowLeft></FaArrowLeft>Back Home</h2></Link>
                     <h1 className="text-2xl font-bold">BISTRO BOSS</h1>
                     <p className="mb-8">Clint Satisfaction first</p>
                 </div>
@@ -18,7 +20,7 @@ const Dashbord = () => {
 
                     {
                         isAdmin ? <>
-                            <li className="hover:text-white"><NavLink className='flex items-center gap-1' to='/dashbord'> <FaHome className="text-lg"></FaHome> Admin Home</NavLink></li>
+                            <li className="hover:text-white"><NavLink className='flex items-center gap-1' to='/dashbord/admin-home'> <FaHome className="text-lg"></FaHome> Admin Home</NavLink></li>
 
                             <li><NavLink to='add-items' className='flex items-center gap-1'><FaNotesMedical className="text-lg"></FaNotesMedical> Add Item</NavLink></li>
 
@@ -30,7 +32,7 @@ const Dashbord = () => {
                         </>
                             :
                         <>
-                            <li className="hover:text-white "><NavLink to='/dashbord' className='flex items-center gap-1'><FaHome className="text-lg"></FaHome> User Home</NavLink></li>
+                            <li className="hover:text-white "><NavLink to='/dashbord/user-home' className='flex items-center gap-1'><FaHome className="text-lg"></FaHome> User Home</NavLink></li>
 
                             <li><NavLink to='resurvation' className='flex items-center gap-1'><FaCalendarAlt className="text-lg"></FaCalendarAlt> Resurvation</NavLink></li>
 
@@ -51,7 +53,7 @@ const Dashbord = () => {
                     <li><NavLink to='contact' className='flex items-center gap-1'><FaMailBulk className="text-lg"></FaMailBulk> Contact</NavLink></li>
                 </ul>
             </div>
-            <div className="col-span-10 mt-4">
+            <div className="col-span-9 mt-4">
                 <Outlet></Outlet>
             </div>
         </div>
