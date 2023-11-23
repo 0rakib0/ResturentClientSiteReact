@@ -6,6 +6,7 @@ import { AuthContext } from "../Provider/Provider"
 const useCard = () => {
     const {user} = useContext(AuthContext)
     const axiousSecure = useAxious()
+    console.log(user?.email)
     const {refetch, data: card} = useQuery({
         queryKey: ['card', user?.email],
         queryFn: async () => {
